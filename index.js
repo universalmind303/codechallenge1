@@ -44,7 +44,7 @@ const subrange = (subArray) =>{
   let count = 0;
   let sorted = [...subArray].sort();
   if(JSON.stringify(sorted) === JSON.stringify(subArray)) count ++;
-  // else if( JSON.stringify(sorted.reverse()) === JSON.stringify(subArray)) count--;
+  else if( JSON.stringify(sorted.reverse()) === JSON.stringify(subArray)) count--;
   for(let i = 0; i < subArray.length; i++) {
     if(subArray[i] < subArray[i+1]) count++;
     else if(subArray[i] > subArray[i+1]) count --;
