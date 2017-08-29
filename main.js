@@ -40,19 +40,70 @@ const findRanges = ([input1, input2]) =>{
     return output
 }
 
-var a = subrange([1,2,5,3,3]);
-console.log(JSON.stringify(a));
+class SubsetCount {
+  constructor(){
+    this.array = array
+    this.count = 0
+  }
+  getAdditional(array) {
+    if(array.length < 2) return this.count
+    while(array.length > 2) {
+      this.count++
+      array.shift()
+    }
+  }
+
+  getCount(array=this.array) {
+    if(array.length < 2) return this.count
+    let i = 1;
+    let current = array[0];
+    let currentSequence = [current]
+    let bool = true
+    while(bool) {
+      if(this.operator(current, array[i])) {
+        if(currentSequence.length > 2) this.count++ 
+        this.count++
+        currentSequence.push(array[i])
+        current = array[i]
+        i++      
+      } else {
+        if(currentSequence.length > 2) {
+          this.count++ 
+          i--          
+          this.getCount(array.slice(i))
+
+        } else {
+          this.getCount(array.slice(1))
+        }
+        this.getAdditional(currentSequence.slice(1))
+        bool = !bool
+      }
+    }
+    return this.count
+  }
+}
+class IncreasingSubsets extends SubsetCount {
+  constructor(){
+    super()
+  }
+  operator(x,y) {
+    return +x < +y
+  }
+}
+
+class DecreasingSubsets extends SubsetCount {
+  constructor(){
+    super()
+  }
+  operator(x,y) {
+    return +x > +y
+  }
+}
 
 const subrange = (subArray) =>{
-  let count = 0;
-  let sorted = [...subArray].sort();
-  if(JSON.stringify(sorted) === JSON.stringify(subArray)) count ++;
-  else if( JSON.stringify(sorted.reverse()) === JSON.stringify(subArray)) count--;
-  for(let i = 0; i < subArray.length; i++) {
-    if(subArray[i] < subArray[i+1]) count++;
-    else if(subArray[i] > subArray[i+1]) count --;
-  }
-  return count
+  let increasingCount = new IncreasingSubsets(array=subArray, count=0)
+  let decreasingCount = new DecreasingSubsets(array=subArray, count=0)
+  return increasingCount.getCount() - decreasingCount.getCount()
 }
 
 const writeToFile = async (location, data) =>{

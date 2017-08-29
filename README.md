@@ -4,13 +4,9 @@ For testing purposes, I made a `generateInputFile` function that creates random 
 
 You can run the test by inserting your input text to `input.txt`, or use the default provided, then from the console:
 
-Python:
-
-`python3 index.py` or: `python index.py`
-
 Node: 
 
-`node index.js` 
+`node main.js` 
 
 it will output to `output.txt`
 
