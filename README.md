@@ -1,5 +1,9 @@
 # Code CHALLENGE
 
+if you do not have bluebird installed, please run:
+
+`npm install bluebird`
+
 For testing purposes, I made a `generateInputFile` function that creates random input file sizes. 
 
 You can run the test by inserting your input text to `input.txt`, or use the default provided, then from the console:
